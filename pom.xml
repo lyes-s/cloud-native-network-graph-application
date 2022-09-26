@@ -12,8 +12,13 @@
   <name>cloud-native-network-graph-application</name>
 
   <properties>
-    <java.version>11</java.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <modules>
+    <module>network-graph-service</module>
+  </modules>
 
 </project>

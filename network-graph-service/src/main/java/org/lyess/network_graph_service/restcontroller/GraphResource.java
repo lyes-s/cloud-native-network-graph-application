@@ -1,7 +1,6 @@
 package org.lyess.network_graph_service.restcontroller;
 
 import org.lyess.network_graph_service.domain.Graph;
-import org.lyess.network_graph_service.domain.Node;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -19,7 +18,6 @@ public class GraphResource {
 
     @GET
     public Response getAllGraphs(){
-        Node x = new Node();
         return null;
     }
 

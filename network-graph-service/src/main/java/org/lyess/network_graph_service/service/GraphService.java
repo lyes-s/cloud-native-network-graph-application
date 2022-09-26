@@ -13,20 +13,20 @@ import java.util.Optional;
  * @created : 2022-09-26 2:22 p.m.
  */
 @ApplicationScoped
-public class GraphService implements IGraphService {
+public class GraphService implements IGraphService<Graph, Long> {
 
     @Override
-    public List<Graph> getAllGraphs() {
+    public List<Graph> getAll() {
         return null;
     }
 
     @Override
-    public Optional<Graph> findGraphById(String id) {
+    public Optional<Graph> findGraphById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<Graph> save(Graph graph) throws GraphAlreadyExistsException {
+    public Optional<Graph> save(Graph graph) {
         return Optional.empty();
     }
 }

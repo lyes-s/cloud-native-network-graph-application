@@ -3,7 +3,6 @@ package org.lyess.network_graph_service.service;
 import org.lyess.network_graph_service.domain.Graph;
 import org.lyess.network_graph_service.exception.GraphAlreadyExistsException;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,12 +11,12 @@ import java.util.Optional;
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-26 2:21 p.m.
  */
-public interface IGraphService {
+public interface IGraphService<T, ID> {
 
-    List<Graph> getAllGraphs();
+    List<T> getAll();
 
-    Optional<Graph> findGraphById(String id);
+    Optional<T> findGraphById(ID id);
 
-    Optional<Graph> save(Graph graph) throws GraphAlreadyExistsException;
+    Optional<T> save(T t);
 
 }

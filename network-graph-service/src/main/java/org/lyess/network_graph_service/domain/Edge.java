@@ -8,15 +8,9 @@ import java.util.Objects;
  * @created : 2022-09-26 12:54 p.m.
  */
 public class Edge {
-
-    private Long id;
     private Node source;
     private Node destination;
-    private Long cost;
-
-    public Long getId() {
-        return id;
-    }
+    private int cost;
 
     public Node getSource() {
         return source;
@@ -26,8 +20,20 @@ public class Edge {
         return destination;
     }
 
-    public Long getCost() {
+    public int getCost() {
         return cost;
+    }
+
+    public void setSource(Node source) {
+        this.source = source;
+    }
+
+    public void setDestination(Node destination) {
+        this.destination = destination;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     @Override
@@ -35,12 +41,12 @@ public class Edge {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Edge edge = (Edge) o;
-        return id.equals(edge.id) && ( (source.equals(edge.source) && destination.equals(edge.destination))
+        return ( (source.equals(edge.source) && destination.equals(edge.destination))
                 || (source.equals(edge.destination) && destination.equals(edge.source)));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, source, destination, cost);
+        return Objects.hash(source, destination, cost);
     }
 }

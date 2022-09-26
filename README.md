@@ -7,7 +7,6 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/lyes-s/cloud-native-network-graph-application)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/lyes-s/cloud-native-network-graph-application)
 ![GitHub Release Date](https://img.shields.io/github/release-date/lyes-s/cloud-native-network-graph-application)
-![GitHub commit activity (branch)](https://img.shields.io/github/commit-activity/y/lyes-s/cloud-native-network-graph-application/main)
 ![GitHub Repo stars](https://img.shields.io/github/stars/lyes-s/cloud-native-network-graph-application?style=social)
 [![license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/lyes-s/cloud-native-network-graph-application/blob/main/LICENSE.md)
 

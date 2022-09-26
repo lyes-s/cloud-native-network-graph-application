@@ -10,10 +10,8 @@ import java.util.Optional;
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-26 2:04 p.m.
  */
-public interface IGraphRepository {
-
-    List<Graph> findAll();
-    Optional<Graph> findById(String id);
-    Optional<Graph> save(Graph graph);
-
+public interface IGraphRepository<T, ID> {
+    List<T> findAll();
+    Optional<T> findById(ID id);
+    Optional<T> save(T t);
 }

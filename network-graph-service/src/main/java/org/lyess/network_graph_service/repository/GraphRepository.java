@@ -12,7 +12,7 @@ import java.util.Optional;
  * @created : 2022-09-26 2:08 p.m.
  */
 @ApplicationScoped
-public class GraphRepository implements IGraphRepository {
+public class GraphRepository implements IGraphRepository<Graph, Long> {
 
     @Override
     public List<Graph> findAll() {
@@ -20,7 +20,7 @@ public class GraphRepository implements IGraphRepository {
     }
 
     @Override
-    public Optional<Graph> findById(String id) {
+    public Optional<Graph> findById(Long id) {
         return Optional.empty();
     }
 

@@ -11,7 +11,7 @@ import javax.ws.rs.core.Application;
  * @date 2022-09-06
  *
  */
-@ApplicationPath("graph")
+@ApplicationPath("api")
 public class JAXRSConfiguration extends Application {
 
 }

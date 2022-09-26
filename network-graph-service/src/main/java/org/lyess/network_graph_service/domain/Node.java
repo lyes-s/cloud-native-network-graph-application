@@ -1,6 +1,5 @@
 package org.lyess.network_graph_service.domain;
 
-import java.net.Inet4Address;
 import java.util.Objects;
 
 /**
@@ -9,15 +8,15 @@ import java.util.Objects;
  * @created : 2022-09-26 12:45 p.m.
  */
 public class Node {
-    private Long id;
-    private Inet4Address inet4Address;
 
-    public Long getId() {
-        return id;
+    private String ip4Address;
+
+    public String getIp4Address() {
+        return ip4Address;
     }
 
-    public Inet4Address getInet4Address() {
-        return inet4Address;
+    public void setIp4Address(String ip4Address) {
+        this.ip4Address = ip4Address;
     }
 
     @Override
@@ -25,19 +24,16 @@ public class Node {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
-        return id.equals(node.id) && inet4Address.equals(node.inet4Address);
+        return ip4Address.equals(node.ip4Address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, inet4Address);
+        return Objects.hash(ip4Address);
     }
 
     @Override
     public String toString() {
-        return "Node{" +
-                "id=" + id +
-                ", inet4Address=" + inet4Address +
-                '}';
+        return "Node{ ip4Address=" + ip4Address + "}";
     }
 }

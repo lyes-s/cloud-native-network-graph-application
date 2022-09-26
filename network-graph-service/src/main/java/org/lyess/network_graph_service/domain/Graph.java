@@ -1,8 +1,7 @@
 package org.lyess.network_graph_service.domain;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author : Lyes Sefiane
@@ -12,19 +11,30 @@ import java.util.Objects;
 public class Graph {
 
     private Long id;
-    private List<Node> nodes;
-    private List<Edge> edges;
+    private Set<Node> nodes;
+    private Set<Edge> edges;
 
     public Long getId() {
         return id;
     }
 
-    public List<Node> getNodes() {
+    public Set<Node> getNodes() {
         return nodes;
     }
 
-    public List<Edge> getEdges() {
+    public Set<Edge> getEdges() {
         return edges;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNodes(Set<Node> nodes) {
+        this.nodes = nodes;
+    }
+
+    public void setEdges(Set<Edge> edges) {
+        this.edges = edges;
     }
 
     @Override

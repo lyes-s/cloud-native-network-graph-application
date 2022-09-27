@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  network-graph-service:
+    image: lyes-s/network-graph:1.0.0
+    container_name: network-graph-service
+    restart: unless-stopped
+    ports:
+      - ${NETWORK_GRAPH_PORT1}:${NETWORK_GRAPH_PORT1}
+      - ${NETWORK_GRAPH_PORT2}:${NETWORK_GRAPH_PORT2}
+    depends_on:
+      - mongodb
+    profiles:
+      - graph
+    networks:
+      - microservices
+
+  mongodb:
+    image: mongo
+    container_name: mongodb-service
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    ports:
+      - ${MONGDB_PORT}:${MONGDB_PORT}
+    volumes:
+      - ../mongodb-service:/docker-entrypoint-initdb.d
+      - mongodb-data:/data/db
+    profiles:
+      - graph
+    networks:
+      - microservices
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - ${MONGO_EXPRESS_PORT}:${MONGO_EXPRESS_PORT}
+    depends_on:
+      - mongodb
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${ME_CONFIG_MONGODB_ADMINUSERNAME}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${ME_CONFIG_MONGODB_ADMINPASSWORD}
+      ME_CONFIG_MONGODB_URL: ${ME_CONFIG_MONGODB_URL}
+      ME_CONFIG_BASICAUTH_USERNAME: ${ME_CONFIG_BASICAUTH_USERNAME}
+      ME_CONFIG_BASICAUTH_PASSWORD: ${ME_CONFIG_BASICAUTH_PASSWORD}
+    profiles:
+      - graph
+    networks:
+      - microservices
+
+volumes:
+  mongodb-data:
+
+networks:
+  microservices:

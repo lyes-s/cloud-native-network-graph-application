@@ -26,6 +26,6 @@ public class GraphService implements IGraphService<Graph, String> {
 
     @Override
     public Optional<Graph> findGraphById(String id) {
-        return Optional.empty();
+        return graphRepository.findById(id);
     }
 }

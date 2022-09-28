@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mongodb.client.model.Filters.eq;
+
 /**
  * @author : Lyes Sefiane
  * @mailto : lyes.sefiane@gmail.com
@@ -34,6 +36,7 @@ public class GraphRepository implements IGraphRepository<Graph, String> {
 
     @Override
     public Optional<Graph> findById(String id) {
-        return Optional.empty();
+        MongoCollection<Graph> collection = database.getCollection(collectionName, Graph.class);
+        return Optional.ofNullable(collection.find(eq("_id", id)).first());
     }
 }

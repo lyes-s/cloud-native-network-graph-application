@@ -1,7 +1,5 @@
 package org.lyess.network_graph_service.repository;
 
-import org.lyess.network_graph_service.domain.Graph;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,5 +11,4 @@ import java.util.Optional;
 public interface IGraphRepository<T, ID> {
     List<T> findAll();
     Optional<T> findById(ID id);
-    Optional<T> save(T t);
 }

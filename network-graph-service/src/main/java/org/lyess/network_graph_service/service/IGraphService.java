@@ -14,6 +14,4 @@ public interface IGraphService<T, ID> {
 
     Optional<T> findGraphById(ID id);
 
-    Optional<T> save(T t);
-
 }

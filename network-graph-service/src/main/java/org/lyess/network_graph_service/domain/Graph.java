@@ -10,11 +10,11 @@ import java.util.Set;
  */
 public class Graph {
 
-    private Long id;
+    private String id;
     private Set<Node> nodes;
     private Set<Edge> edges;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -25,7 +25,7 @@ public class Graph {
     public Set<Edge> getEdges() {
         return edges;
     }
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

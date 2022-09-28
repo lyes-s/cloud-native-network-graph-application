@@ -21,7 +21,7 @@ import java.util.List;
 public class GraphResource {
 
     @Inject
-    private IGraphService<Graph, Long> graphService;
+    private IGraphService<Graph, String> graphService;
 
     @GET
     public Response getAllGraphs(){
@@ -31,24 +31,7 @@ public class GraphResource {
 
     @GET
     @Path("{id}")
-    public Response getGraphById(final @PathParam("id") Long id){
-        return null;
-    }
-
-    @POST
-    public Response saveGraph(final Graph graph) {
-        return null;
-    }
-
-    @PUT
-    @Path("{id}")
-    public Response updateGraph(final @PathParam("id") Long id, final Graph graph) {
-        return null;
-    }
-
-    @DELETE
-    @Path("{id}")
-    public Response deleteGraph(final @PathParam("id") Long id){
+    public Response getGraphById(final @PathParam("id") String id){
         return null;
     }
 }

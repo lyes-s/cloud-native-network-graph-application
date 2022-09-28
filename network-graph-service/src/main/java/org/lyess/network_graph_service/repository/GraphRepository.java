@@ -2,6 +2,7 @@ package org.lyess.network_graph_service.repository;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.lyess.network_graph_service.domain.Graph;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * @created : 2022-09-26 2:08 p.m.
  */
 @ApplicationScoped
-public class GraphRepository implements IGraphRepository<Graph, Long> {
+public class GraphRepository implements IGraphRepository<Graph, String> {
 
     @Inject
     private MongoDatabase database;
@@ -32,12 +33,7 @@ public class GraphRepository implements IGraphRepository<Graph, Long> {
     }
 
     @Override
-    public Optional<Graph> findById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Graph> save(Graph graph) {
+    public Optional<Graph> findById(String id) {
         return Optional.empty();
     }
 }

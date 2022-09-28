@@ -14,10 +14,10 @@ import java.util.Optional;
  * @created : 2022-09-26 2:22 p.m.
  */
 @ApplicationScoped
-public class GraphService implements IGraphService<Graph, Long> {
+public class GraphService implements IGraphService<Graph, String> {
 
     @Inject
-    private IGraphRepository<Graph, Long> graphRepository;
+    private IGraphRepository<Graph, String> graphRepository;
 
     @Override
     public List<Graph> getAll() {
@@ -25,12 +25,7 @@ public class GraphService implements IGraphService<Graph, Long> {
     }
 
     @Override
-    public Optional<Graph> findGraphById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<Graph> save(Graph graph) {
+    public Optional<Graph> findGraphById(String id) {
         return Optional.empty();
     }
 }

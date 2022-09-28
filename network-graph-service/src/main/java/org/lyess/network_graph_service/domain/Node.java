@@ -1,5 +1,7 @@
 package org.lyess.network_graph_service.domain;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Objects;
 
 /**
@@ -8,7 +10,8 @@ import java.util.Objects;
  * @created : 2022-09-26 12:45 p.m.
  */
 public class Node {
-
+    @NotBlank(message = "must not be empty or null")
+    @Pattern(message = "Please provide a valid IPV4", regexp = "^(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\\.(?!$)|$)){4}$")
     private String ip4Address;
 
     public String getIp4Address() {

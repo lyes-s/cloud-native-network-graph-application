@@ -1,5 +1,7 @@
 package org.lyess.network_graph_service.domain;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,7 +11,8 @@ import java.util.Set;
  * @created : 2022-09-26 12:45 p.m.
  */
 public class Graph {
-
+    @NotBlank(message = "must not be empty or null")
+    @Size(min = 1, max = 100, message = "Id Size is Between 1 - 100 Digits")
     private String id;
     private Set<Node> nodes;
     private Set<Edge> edges;

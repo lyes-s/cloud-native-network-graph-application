@@ -1,6 +1,7 @@
 package org.lyess.network_graph_service.restcontroller;
 
 import org.lyess.network_graph_service.domain.Graph;
+import org.lyess.network_graph_service.exception.GraphNotFoundException;
 import org.lyess.network_graph_service.service.IGraphService;
 
 import javax.inject.Inject;
@@ -32,6 +33,8 @@ public class GraphResource {
     @GET
     @Path("{id}")
     public Response getGraphById(final @PathParam("id") String id){
-        return null;
+        Graph graph = graphService.findGraphById(id)//
+                .orElseThrow(() -> new GraphNotFoundException("Graph Id = " + id + " Not Found !"));
+        return Response.status(Status.OK).entity(graph).build();
     }
 }

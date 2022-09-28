@@ -1,6 +1,9 @@
 package org.lyess.network_graph_service.producer;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -22,6 +25,9 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 public class MongoProducer {
 
     private MongoClient mongoClient;
+
+    private MongoCredential credential;
+
     private CodecRegistry pojoCodecRegistry;
 
     @Inject
@@ -33,12 +39,21 @@ public class MongoProducer {
     private int mongodbPort;
 
     @Inject
+    @ConfigProperty(name = "mongo.client.database.username")
+    private String username;
+
+    @Inject
+    @ConfigProperty(name = "mongo.client.database.password")
+    private String password;
+
+    @Inject
     @ConfigProperty(name = "mongo.client.database.name")
     private String mongoDatabaseName;
 
     @PostConstruct
     void initialize() {
-        mongoClient = new MongoClient(mongodbHost, mongodbPort);
+        credential = MongoCredential.createCredential(username, mongoDatabaseName, password.toCharArray());
+        mongoClient = new MongoClient(new ServerAddress(mongodbHost, mongodbPort), credential, MongoClientOptions.builder().build());
         pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
                 fromProviders(PojoCodecProvider.builder().automatic(true).build()));
     }

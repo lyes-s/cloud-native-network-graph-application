@@ -1,10 +1,14 @@
 package org.lyess.network_graph_service.restcontroller;
 
 import org.lyess.network_graph_service.domain.Graph;
+import org.lyess.network_graph_service.service.IGraphService;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.util.List;
 
 /**
  * @author : Lyes Sefiane
@@ -16,9 +20,13 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class GraphResource {
 
+    @Inject
+    private IGraphService<Graph, Long> graphService;
+
     @GET
     public Response getAllGraphs(){
-        return null;
+        List<Graph> graphs = graphService.getAll();
+        return Response.status(Status.OK).entity(graphs).build();
     }
 
     @GET

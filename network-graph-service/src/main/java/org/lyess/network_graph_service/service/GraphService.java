@@ -1,9 +1,10 @@
 package org.lyess.network_graph_service.service;
 
 import org.lyess.network_graph_service.domain.Graph;
-import org.lyess.network_graph_service.exception.GraphAlreadyExistsException;
+import org.lyess.network_graph_service.repository.IGraphRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +16,12 @@ import java.util.Optional;
 @ApplicationScoped
 public class GraphService implements IGraphService<Graph, Long> {
 
+    @Inject
+    private IGraphRepository<Graph, Long> graphRepository;
+
     @Override
     public List<Graph> getAll() {
-        return null;
+        return graphRepository.findAll();
     }
 
     @Override

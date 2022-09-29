@@ -5,7 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.lyess.network_graph_service.domain.Graph;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ import static com.mongodb.client.model.Filters.eq;
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-26 2:08 p.m.
  */
-@ApplicationScoped
+@Stateless
 public class GraphRepository implements IGraphRepository<Graph, String> {
 
     @Inject

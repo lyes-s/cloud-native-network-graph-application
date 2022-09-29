@@ -1,7 +1,10 @@
 package org.lyess.network_graph_service.domain;
 
+import org.lyess.network_graph_service.hypermedia.Hypermedia;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,7 +13,7 @@ import java.util.Set;
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-26 12:45 p.m.
  */
-public class Graph {
+public class Graph extends Hypermedia implements Serializable {
     @NotBlank(message = "must not be empty or null")
     @Size(min = 1, max = 100, message = "Id Size is Between 1 - 100 Digits")
     private String id;

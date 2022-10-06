@@ -1,13 +1,19 @@
 package org.lyess.network_graph_service.exception.entity;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 /**
  * @author : Lyes Sefiane
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-26 1:31 p.m.
  */
-public class ValidationError {
+@Schema(name = "ValidationError")
+public class ValidationError implements ErrorResponse {
 
+    @Schema(name = "property", required = true)
     private String property;
+
+    @Schema(name = "message", required = true)
     private String message;
 
 

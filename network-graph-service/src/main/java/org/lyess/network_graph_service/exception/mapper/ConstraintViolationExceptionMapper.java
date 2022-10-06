@@ -1,5 +1,7 @@
 package org.lyess.network_graph_service.exception.mapper;
 
+import org.lyess.network_graph_service.exception.GraphExceptionResponse;
+import org.lyess.network_graph_service.exception.entity.ErrorResponse;
 import org.lyess.network_graph_service.exception.entity.ValidationError;
 
 import javax.validation.ConstraintViolation;
@@ -22,12 +24,15 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {
-        List<ValidationError> errors = exception.getConstraintViolations()//
+        List<ErrorResponse> errors = exception.getConstraintViolations()//
                 .stream()//
                 .map(this::toValidationError)//
                 .collect(Collectors.toList());
 
-        return Response.status(Status.BAD_REQUEST).entity(errors).type(MediaType.APPLICATION_JSON).build();
+        GraphExceptionResponse x = new GraphExceptionResponse(exception.getMessage(), Status.BAD_REQUEST);
+        x.setDetails(errors);
+
+        return Response.status(Status.BAD_REQUEST).entity(x).type(MediaType.APPLICATION_JSON).build();
     }
 
     private ValidationError toValidationError(ConstraintViolation<?> constraintViolation) {

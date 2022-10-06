@@ -1,5 +1,7 @@
 package org.lyess.network_graph_service.hypermedia;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 import javax.ws.rs.core.Link;
 import java.io.Serializable;
 import java.net.URI;
@@ -9,10 +11,15 @@ import java.net.URI;
  * @mailto : lyes.sefiane@gmail.com
  * @created : 2022-09-28 2:02 p.m.
  */
+@Schema(name = "LinkResource")
 public class LinkResource implements Serializable {
 
+    @Schema(name = "rel", required = true, example = "SELF")
     private String rel;
+    @Schema(name = "type", required = true, example = "GET")
     private String type;
+
+    @Schema(name = "uri", required = true, example = "http://localhost:8080/network-graph-service/api/v1/graph/1")
     private URI uri;
 
     public LinkResource(Link link) {

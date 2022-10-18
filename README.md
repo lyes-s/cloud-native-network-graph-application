@@ -14,6 +14,10 @@
 
 * [lyes-s/cloud-native-network-graph-application/wiki](https://github.com/lyes-s/cloud-native-network-graph-application/wiki)
 
+## Network Graph Service
+
+* [lyes-s/cloud-native-network-graph-application/network-graph-service](https://github.com/lyes-s/cloud-native-network-graph-application/tree/main/network-graph-service)
+
 # Requirements
 ```
 1. Java 11.x.y

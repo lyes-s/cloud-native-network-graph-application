@@ -9,6 +9,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.lyess.network_graph_service.annotation.CacheControlConfig;
 import org.lyess.network_graph_service.domain.Graph;
 import org.lyess.network_graph_service.exception.GraphExceptionResponse;
 import org.lyess.network_graph_service.exception.GraphNotFoundException;
@@ -20,7 +21,6 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 /**
@@ -43,17 +43,32 @@ public class GraphResource {
     @Context
     private UriInfo uriInfo;
 
+    @Inject
+    @CacheControlConfig(maxAge = 86400)
+    CacheControl cc;
+
     @GET
     @Path("/")
     @Operation(summary = "Get All Graphs")
     @APIResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Graph.class)))
-    public Response getAllGraphs(){
+    public Response getAllGraphs(@Context Request request) {
         List<Graph> graphs = graphService.getAll();
         graphs.stream().forEach(graph -> {
-            LinkResource self = buildLink(graph, "getAllGraphs", "self", "Get");
+            LinkResource self = buildLink(graph, "getGraphById", "self", "Get");
             graph.addLink(self);
         });
-        return Response.status(Status.OK).entity(graphs).build();
+
+        EntityTag entityTag = new EntityTag(Integer.toString(graphs.hashCode()));
+        Response.ResponseBuilder builder = request.evaluatePreconditions(entityTag);
+
+        // cached resource did change -> serve updated content
+        if(builder == null){
+            builder = Response.ok(graphs);
+            builder.tag(entityTag);
+        }
+
+        builder.cacheControl(cc);
+        return builder.build();
     }
 
     @GET
@@ -64,12 +79,23 @@ public class GraphResource {
             @APIResponse(responseCode = "404", description = "NOT_FOUND", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GraphExceptionResponse.class))),
             @APIResponse(responseCode = "400", description = "BAD_REQUEST", content = @Content(schema = @Schema(implementation = GraphExceptionResponse.class)))
     })
-    public Response getGraphById(final @PathParam("id") @NotBlank String id){
+    public Response getGraphById(final @PathParam("id") @NotBlank String id, @Context Request request){
         Graph graph = graphService.findGraphById(id)//
                 .orElseThrow(() -> new GraphNotFoundException("Graph Id = " + id + " Not Found !"));
         LinkResource self = buildLink(graph, "getGraphById", "self", "Get");
         graph.addLink(self);
-        return Response.status(Status.OK).entity(graph).build();
+
+        EntityTag entityTag = new EntityTag(Integer.toString(graph.hashCode()));
+        Response.ResponseBuilder builder = request.evaluatePreconditions(entityTag);
+
+        // cached resource did change -> serve updated content
+        if(builder == null){
+            builder = Response.ok(graph);
+            builder.tag(entityTag);
+        }
+
+        builder.cacheControl(cc);
+        return builder.build();
     }
 
     private LinkResource buildLink(Graph graph, String method, String rel, String type) {

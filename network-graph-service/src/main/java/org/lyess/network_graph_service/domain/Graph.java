@@ -55,13 +55,13 @@ public class Graph extends Hypermedia implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Graph)) return false;
         Graph graph = (Graph) o;
-        return id.equals(graph.id);
+        return getId().equals(graph.getId()) && getNodes().equals(graph.getNodes()) && getEdges().equals(graph.getEdges());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId(), getNodes(), getEdges());
     }
 }
